@@ -1,0 +1,13 @@
+<button class="main-button back" routerLink="/admin">Tagasi</button>
+
+<form (ngSubmit)="onSubmit(editItemForm)" [formGroup]="editItemForm">
+    <label>Nimetus</label><br>
+    <input placeholder="Toote nimetus" type="text" required formControlName="title"><br>
+    <label>Pilt</label><br>
+    <input placeholder="Toote pilt" type="text" required formControlName="imgSrc"><br>
+    <label>Hind</label><br>
+    <input placeholder="Toote hind" type="text" required formControlName="price"><br>
+    <label>Kategooria</label><br>
+    <input placeholder="Toote kategooria" type="text" required formControlName="category"><br>
+    <button class="main-button add" [disabled]="editItemForm.invalid" type="submit">Sisesta toode</button>
+</form>

@@ -1,0 +1,20 @@
+<p>home works!</p> <button routerLink="admin">Admin</button><br>
+<br><br>
+
+<br>
+<div class="filter-bar">
+    <div class="filter-name">Järjesta</div>
+    <div class="filter-value price" (click)="onSortPrice()">Hinna alusel</div>
+    <div class="filter-value title" (click)="onSortTitle()">Tähestiku järgi</div>
+</div>
+
+<div class="items-wrapper">
+    <div class="item" *ngFor="let item of itemsShown">
+        <img src="{{ item.imgSrc }}">
+        <div class="add-to-cart-button-wrapper">
+            <div (click)="onAddToCart(item)">Lisa ostukorvi</div>
+        </div>
+        <div class="item-title">{{ item.title }}</div>
+        <div class="item-price">{{ item.price }} €</div>
+    </div>     
+</div>

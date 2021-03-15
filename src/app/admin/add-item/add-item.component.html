@@ -1,0 +1,14 @@
+<button class="main-button back" routerLink="/admin">Tagasi</button>
+
+
+<form (ngSubmit)="onSubmit(addItemForm)" #addItemForm="ngForm">
+    <label>Nimetus</label><br>
+    <input placeholder="Toote nimetus" type="text" required ngModel name="title"><br>
+    <label>Pilt</label><br>
+    <input placeholder="Toote pilt" type="text" required ngModel name="imgSrc"><br>
+    <label>Hind</label><br>
+    <input placeholder="Toote hind" type="number" required ngModel name="price"><br>
+    <label>Kategooria</label><br>
+    <input placeholder="Toote kategooria" type="text" required ngModel name="category"><br>
+    <button class="main-button add" [disabled]="addItemForm.invalid" type="submit">Sisesta toode</button>
+</form>

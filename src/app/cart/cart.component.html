@@ -1,8 +1,8 @@
 <div class="empty-cart-button" (click)="onEmptyCart()" *ngIf="cartItems.length > 0 ">Tühjenda ostukorv</div>
 
 <div class="items-wrapper">
-    <div class="items" *ngFor="let item of cartItems; let i = index">
-        <img src="{{item.imgSrc}}">
+    <div class="item" *ngFor="let item of cartItems; let i = index">
+        <img src="{{ item.imgSrc }}">
         <div class="item-title">{{ item.title }}</div>
         <div class="item-price">{{ item.price }} €</div>
         <img (click)="onDeleteFromCart(i)" class="delete-from-cart-button" src="assets/delete.svg" alt="">

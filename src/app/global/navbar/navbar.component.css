@@ -29,16 +29,17 @@
 }
 
 .cart-button img {
-    height: 80px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
 }
 
 .cart-button span {
     color: white;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .cart-button:hover span {
-    color: black;
+    color: #5e9fc5;
 }

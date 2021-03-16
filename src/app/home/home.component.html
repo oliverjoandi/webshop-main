@@ -12,7 +12,7 @@
     <div class="item" *ngFor="let item of itemsShown">
         <img src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
-            <div (click)="onAddToCart(item)">Lisa ostukorvi</div>
+            <div class="add-to-cart-button" (click)="onAddToCart(item)">Lisa ostukorvi</div>
         </div>
         <div class="item-title">{{ item.title }}</div>
         <div class="item-price">{{ item.price }} €</div>

@@ -17,6 +17,9 @@ import { AddItemComponent } from './admin/add-item/add-item.component';
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
+import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
+import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
+import { ViewComponent } from './item/view/view.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { ViewItemsComponent } from './admin/view-items/view-items.component';
     AddItemComponent,
     EditItemComponent,
     AdminHomeComponent,
-    ViewItemsComponent
+    ViewItemsComponent,
+    ThousandSeparatorPipe,
+    ShortenTitlePipe,
+    ViewComponent
   ],
   imports: [
     BrowserModule,

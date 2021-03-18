@@ -1,6 +1,10 @@
 <p>home works!</p> <button routerLink="admin">Admin</button><br>
 <br><br>
 
+<!-- {{ kuupaev | date:"short" | uppercase }}
+{{ 50000 | currency:"EUR"}} -->
+
+
 <br>
 <div class="filter-bar">
     <div class="filter-name">{{ 'sort-text' | translate }}</div>
@@ -9,12 +13,16 @@
 </div>
 
 <div class="items-wrapper">
-    <div class="item" *ngFor="let item of itemsShown">
-        <img src="{{ item.imgSrc }}">
+    <div class="item" *ngFor="let item of itemsShown; let i = index">
+        <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
-            <div class="add-to-cart-button" (click)="onAddToCart(item)">{{ 'Lisa ostukorvi' | translate }}</div>
+            <div class="add-to-cart-button">
+                <span (click)="onDeleteFromCart(item)">-</span>
+                <span> kogus </span>
+                <span (click)="onAddToCart(item)">+</span>
+            </div>
         </div>
-        <div class="item-title">{{ item.title | translate }}</div>
-        <div class="item-price">{{ item.price }} €</div>
+        <div class="item-title">{{ item.title | translate | shortenTitle:5 }}</div>
+        <div class="item-price">{{ item.price | thousandSeparator }} €</div>
     </div>     
 </div>

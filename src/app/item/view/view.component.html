@@ -1,1 +1,8 @@
 {{ item | json }}
+
+<div class="add-to-cart-button-wrapper">
+    <div class="add-to-cart-button">
+        <span (click)="onDeleteFromCart(item)">-</span>
+        <span> kogus </span>
+        <span (click)="onAddToCart(item)">+</span>
+</div>

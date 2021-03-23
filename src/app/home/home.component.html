@@ -1,9 +1,11 @@
-<p>home works!</p> <button routerLink="admin">Admin</button><br>
-<br><br>
 
 <!-- {{ kuupaev | date:"short" | uppercase }}
 {{ 50000 | currency:"EUR"}} -->
 
+
+<div (click)="onCategoryFilter(category)" *ngFor="let category of itemsOriginal | uniqueCategory">
+    {{ category }}
+</div>
 
 <br>
 <div class="filter-bar">

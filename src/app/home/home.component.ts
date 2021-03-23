@@ -35,7 +35,14 @@ export class HomeComponent implements OnInit {
       // slice teeb massiivist koopia
       // splice kustustab massiivist elemendi
       // split teeb stringist massiivi
+      // let cartItems = this.cartService.cartItems;
+      // this.itemsOriginal.map(item=> {
+      //   cartItems.forEach(cartItem => ) {
+      //     return { ...item, count: cartItem.count}
+      //   }
+      // })
     });
+    
   }
 
   onSortPrice() {
@@ -53,23 +60,37 @@ export class HomeComponent implements OnInit {
      
   }
 
+  onCategoryFilter(category: string) {
+    this.itemsShown = this.itemsOriginal.filter(item => item.category == category)
+  }
+
   onSortTitle() {
     this.itemsShown.sort((a, b) => a.title.localeCompare(b.title));
   }
 
   onDeleteFromCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.title);
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
     if (i != -1) {
-      this.cartService.cartItems.splice(i, 1);
+      if (this.cartService.cartItems[i].count == 1) {
+        this.cartService.cartItems.splice(i, 1);
+      } else { 
+        this.cartService.cartItems[i].count -= 1
+      }
+      
       this.cartService.cartChanged.next(this.cartService.cartItems);
     }
-    
+    // kui tahad et kontrolliks kahte asja siis && märk....a la - item.title == cartItem.title && item.price == cartItem.price
 
   }
 
   onAddToCart(item: Item) {
-    this.cartService.cartItems.push(item)
-    this.cartService.cartChanged.next(this.cartService.cartItems)
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+    if (i == -1) {
+      this.cartService.cartItems.push({ cartItem: item, count: 1 });
+      
+  } else {
+    this.cartService.cartItems[i].count += 1;
   }
+    this.cartService.cartChanged.next(this.cartService.cartItems);
   }
-
+}

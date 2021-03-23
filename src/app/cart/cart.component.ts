@@ -8,7 +8,7 @@ import { CartService } from './cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: Item[] = [];
+  cartItems: { cartItem: Item, count: number }[] = [];
   sumOfCart = 0;
 
   constructor(private cartService: CartService) { }
@@ -25,12 +25,12 @@ export class CartComponent implements OnInit {
     };
   
 
-  onDeleteFromCart(i: number) {
+  onDeleteAllFromCart(i: number) {
     this.cartService.cartItems.splice(i,1)
     this.cartService.cartChanged.next(this.cartService.cartItems)
     this.sumOfCart = 0
     this.cartItems.forEach(item => {
-      this.sumOfCart = this.sumOfCart + item.price      
+      this.sumOfCart = this.sumOfCart + item.cartItem.price      
     });
   }
   onEmptyCart() {
@@ -38,12 +38,46 @@ export class CartComponent implements OnInit {
     this.cartService.cartChanged.next(this.cartService.cartItems)
     this.calculateSumOfCart(); 
     };
+
+  onDeleteOneFromCart(item: Item) {
+      let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+      if (i != -1) {
+        if (this.cartService.cartItems[i].count == 1) {
+          this.cartService.cartItems.splice(i, 1);
+        } else { 
+          this.cartService.cartItems[i].count -= 1
+        }
+        
+        this.cartService.cartChanged.next(this.cartService.cartItems);
+        this.calculateSumOfCart();
+      }
+      // kui tahad et kontrolliks kahte asja siis && märk....a la - item.title == cartItem.title && item.price == cartItem.price
+  
+    }
+  
+    onAddToCart(item: Item) {
+      let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+      if (i == -1) {
+        this.cartService.cartItems.push({ cartItem: item, count: 1 });
+        
+    } else {
+      this.cartService.cartItems[i].count += 1;
+    }
+      this.cartService.cartChanged.next(this.cartService.cartItems);
+      this.calculateSumOfCart();
+    }
+
+
+
+
+
+
   
 
   calculateSumOfCart () {
     this.sumOfCart = 0
     this.cartItems.forEach(item => {
-      this.sumOfCart = this.sumOfCart + item.price      
+      this.sumOfCart = this.sumOfCart + item.cartItem.price * item.count;      
     });
   }
  }

@@ -2,14 +2,20 @@
 
 <div class="items-wrapper">
     <div class="item" *ngFor="let item of cartItems; let i = index">
-        <img src="{{ item.imgSrc }}">
-        <div class="item-title">{{ item.title }}</div>
-        <div class="item-price">{{ item.price }} €</div>
-        <img (click)="onDeleteFromCart(i)" class="delete-from-cart-button" src="assets/delete.svg" alt="">
+        <img src="{{ item.cartItem.imgSrc }}">
+        <div class="add-to-cart-button">
+            <span (click)="onDeleteOneFromCart(item.cartItem)">-</span>
+            <span>{{ item.count }} tk</span>
+            <span (click)="onAddToCart(item.cartItem)">+</span>
+        </div>
+        <div><b>{{ item.count * item.cartItem.price | thousandSeparator }} €</b></div>
+        <div class="item-title">{{ item.cartItem.title }}</div>
+        <div class="item-price">{{ item.cartItem.price | thousandSeparator }} €</div>
+        <img (click)="onDeleteAllFromCart(i)" class="delete-from-cart-button" src="assets/delete.svg" alt="">
     </div>
 </div>
 
-<div class="sum-of-cart" *ngIf="cartItems.length > 0 ">SUMMA: {{ sumOfCart.toFixed(2) }} €</div>
+<div class="sum-of-cart" *ngIf="cartItems.length > 0 ">SUMMA: {{ sumOfCart | thousandSeparator }} €</div>
 
 <div class="empty-cart" *ngIf="cartItems.length == 0">
     <img src="\assets\shopping-cart.svg">

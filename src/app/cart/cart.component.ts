@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Item } from '../models/item.model';
 import { CartService } from './cart.service';
 
@@ -11,7 +12,8 @@ export class CartComponent implements OnInit {
   cartItems: { cartItem: Item, count: number }[] = [];
   sumOfCart = 0;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+    private cookieService: CookieService) { }
 
   // kui minnakse HTML siis pannakse ngOnInIt käima
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class CartComponent implements OnInit {
   onDeleteAllFromCart(i: number) {
     this.cartService.cartItems.splice(i,1)
     this.cartService.cartChanged.next(this.cartService.cartItems)
+    this.cookieService.set( 'Ostukorv', JSON.stringify(this.cartService.cartItems));
     this.sumOfCart = 0
     this.cartItems.forEach(item => {
       this.sumOfCart = this.sumOfCart + item.cartItem.price      
@@ -36,6 +39,7 @@ export class CartComponent implements OnInit {
   onEmptyCart() {
     this.cartService.cartItems.splice(0)
     this.cartService.cartChanged.next(this.cartService.cartItems)
+    this.cookieService.set( 'Ostukorv', JSON.stringify(this.cartService.cartItems));
     this.calculateSumOfCart(); 
     };
 
@@ -49,6 +53,7 @@ export class CartComponent implements OnInit {
         }
         
         this.cartService.cartChanged.next(this.cartService.cartItems);
+        this.cookieService.set( 'Ostukorv', JSON.stringify(this.cartService.cartItems));
         this.calculateSumOfCart();
       }
       // kui tahad et kontrolliks kahte asja siis && märk....a la - item.title == cartItem.title && item.price == cartItem.price
@@ -64,6 +69,7 @@ export class CartComponent implements OnInit {
       this.cartService.cartItems[i].count += 1;
     }
       this.cartService.cartChanged.next(this.cartService.cartItems);
+      this.cookieService.set( 'Ostukorv', JSON.stringify(this.cartService.cartItems));
       this.calculateSumOfCart();
     }
 

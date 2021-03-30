@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService, AuthResponseData } from '../auth.service';
+import { AutologinService } from '../autologin.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private autologinService: AutologinService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
     authObs.subscribe(
       resData => {
         this.isLoading = false;
+        this.autologinService.isLoggedIn.next(true);
         this.router.navigateByUrl("/admin");
       },
       errorMessage => {

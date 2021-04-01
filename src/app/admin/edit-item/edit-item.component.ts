@@ -26,11 +26,16 @@ export class EditItemComponent implements OnInit {
       price: new FormControl(this.item.price),
       imgSrc: new FormControl(this.item.imgSrc),
       category: new FormControl(this.item.category),
+      barcode: new FormControl(this.item.barcode),
+      producer: new FormControl(this.item.producer),
+      description: new FormControl(this.item.description)
     })
   }
   onSubmit(form: FormGroup) {
     if (form.valid == true) {
-      const item = new Item(form.value.imgSrc, form.value.title, form.value.price, form.value.category,)
+      const item = new Item(form.value.imgSrc, form.value.title, form.value.price, form.value.category,form.value.barcode,
+        form.value.producer,
+        form.value.description)
       this.itemService.items[this.id] = item;
       this.itemService.saveItemsToDatabase();
       setTimeout(() => { this.router.navigateByUrl("/admin/view-items") }, 500)

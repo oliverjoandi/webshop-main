@@ -9,5 +9,11 @@
     <input placeholder="Toote hind" type="text" required formControlName="price"><br>
     <label>Kategooria</label><br>
     <input placeholder="Toote kategooria" type="text" required formControlName="category"><br>
+    <label>Ribakood</label><br>
+    <input placeholder="Toote ribakood" type="number"  formControlName="barcode"><br>
+    <label>Tootja</label><br>
+    <input placeholder="Toote tootja" type="text"  formControlName="producer"><br>
+    <label>Kirjeldus</label><br>
+    <input placeholder="Toote kirjeldus" type="text"  formControlName="description"><br>
     <button class="main-button add" [disabled]="editItemForm.invalid" type="submit">Sisesta toode</button>
 </form>

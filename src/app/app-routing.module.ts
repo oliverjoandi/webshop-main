@@ -15,10 +15,15 @@ const routes: Routes = [
   {path: "", component: HomeComponent },
   {path: "view/:itemId", component: ViewComponent },
   {path: "cart", component: CartComponent },
-  {path: "admin", component: AdminHomeComponent, canActivate: [AuthGuard] },
-  {path: "admin/add-item", component: AddItemComponent, canActivate: [AuthGuard]  },
-  {path: "admin/edit-item/:itemId", component: EditItemComponent, canActivate: [AuthGuard]  },
-  {path: "admin/view-items", component: ViewItemsComponent, canActivate: [AuthGuard]  },
+
+  {path: "admin", canActivate: [AuthGuard], children: [
+    {path: "", component: AdminHomeComponent },
+    {path: "add-item", component: AddItemComponent },
+    {path: "edit-item/:itemId", component: EditItemComponent },
+    {path: "view-items", component: ViewItemsComponent  },
+  ] },
+
+ 
   {path: "signup", component: SignupComponent },
   {path: "login", component: LoginComponent },
   // {path: "**", redirectTo: " "},
@@ -26,6 +31,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

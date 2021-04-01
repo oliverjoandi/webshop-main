@@ -24,6 +24,7 @@ import { ViewComponent } from './item/view/view.component';
 import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ItemCardComponent } from './item/item-card/item-card.component';
 
 
 
@@ -43,7 +44,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     ViewComponent,
     UniqueCategoryPipe,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ItemCardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
+        <div class="add-to-cart-button-wrapper">
+            <div class="add-to-cart-button">
+                <span (click)="onDeleteFromCart(item)">-</span>
+                <span> kogus </span>
+                <span (click)="onAddToCart(item)">+</span>
+            </div>
+        </div>
+        <div class="item-title">{{ item.title | translate | shortenTitle:5 }}</div>
+        <div class="item-price">{{ item.price | thousandSeparator }} €</div>

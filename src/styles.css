@@ -34,3 +34,12 @@ input.ng-invalid.ng-touched {
 input.ng-invalid.ng-touched {
     border: 1px solid red;
 }
+
+.item:hover .add-to-cart-button {
+    visibility: visible;
+}
+
+.item img {
+    width: 100%;
+    height: 130px;
+}

@@ -1,3 +1,32 @@
+.is-active {
+ border: 1px solid green;
+ background-color: lightgreen;
+ border-radius: 3px;
+}
+
+.not-active {
+    border: 1px solid red;
+    background-color:lightpink;
+    border-radius: 3px;
+}
+
+.item-grayed {
+opacity: 0.3;
+color: grey;
+}
+
+
+
+.admin-buttons {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+.item-title{
+    height: 70px;
+}
 .item-price {
     text-align: center;
     background-color: #f2f2f2;

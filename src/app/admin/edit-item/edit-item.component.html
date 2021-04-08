@@ -1,4 +1,4 @@
-<button class="main-button back" routerLink="/admin">Tagasi</button>
+<button class="main-button back" (click)="onBack()">Tagasi</button>
 
 <form (ngSubmit)="onSubmit(editItemForm)" [formGroup]="editItemForm">
     <label>Nimetus</label><br>
@@ -15,5 +15,7 @@
     <input placeholder="Toote tootja" type="text"  formControlName="producer"><br>
     <label>Kirjeldus</label><br>
     <input placeholder="Toote kirjeldus" type="text"  formControlName="description"><br>
+    <label>Aktiivne</label><br>
+    <input type="checkbox"  formControlName="isActive"><br>
     <button class="main-button add" [disabled]="editItemForm.invalid" type="submit">Sisesta toode</button>
 </form>

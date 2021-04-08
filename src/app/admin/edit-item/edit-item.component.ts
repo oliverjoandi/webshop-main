@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class EditItemComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private itemService: ItemService,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.id = (Number)(this.activatedRoute.snapshot.paramMap.get('itemId'));
@@ -28,14 +30,20 @@ export class EditItemComponent implements OnInit {
       category: new FormControl(this.item.category),
       barcode: new FormControl(this.item.barcode),
       producer: new FormControl(this.item.producer),
-      description: new FormControl(this.item.description)
+      description: new FormControl(this.item.description),
+      isActive: new FormControl(this.item.isActive)
     })
   }
+
+  onBack() {
+    // this.router.navigateByUrl("/admin/")
+    this.location.back();
+     }
   onSubmit(form: FormGroup) {
     if (form.valid == true) {
       const item = new Item(form.value.imgSrc, form.value.title, form.value.price, form.value.category,form.value.barcode,
         form.value.producer,
-        form.value.description)
+        form.value.description,form.value.isActive)
       this.itemService.items[this.id] = item;
       this.itemService.saveItemsToDatabase();
       setTimeout(() => { this.router.navigateByUrl("/admin/view-items") }, 500)

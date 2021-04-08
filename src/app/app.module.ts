@@ -7,6 +7,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CookieService } from 'ngx-cookie-service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +24,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AdminModule } from './admin/admin.module';
 import { ItemModule } from './item/item.module';
+import { ShowActiveItemsPipe } from './home/show-active-items.pipe';
+import { GalleryCarouselComponent } from './home/gallery-carousel/gallery-carousel.component';
+
 
 
 
@@ -37,6 +42,8 @@ import { ItemModule } from './item/item.module';
     UniqueCategoryPipe,
     LoginComponent,
     SignupComponent,
+    ShowActiveItemsPipe,
+    GalleryCarouselComponent,
     
   ],
   imports: [
@@ -53,7 +60,8 @@ import { ItemModule } from './item/item.module';
       }
   }),
   AdminModule,
-  ItemModule
+  ItemModule,
+  NgbModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

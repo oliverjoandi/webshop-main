@@ -1,6 +1,16 @@
+<span class="admin-buttons" *ngIf="isLoggedIn">
+<span [ngClass]="{'is-active': item.isActive, 'not-active': !item.isActive}" (click)="OnItemActive()">
+    <span *ngIf="!item.isActive;else templateName">Aktiivseks</span>
+    <ng-template #templateName>Mitte aktiivseks</ng-template>
+</span>
+<span [routerLink]="['/admin/edit-item', i]">Muuda</span>
+</span>
+
+
+<span [ngClass]="{'item-grayed': !item.isActive}">
 <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
-            <div class="add-to-cart-button">
+            <div class="add-to-cart-button" *ngIf="item.isActive">
                 <span (click)="onDeleteFromCart(item)">-</span>
                 <span> kogus </span>
                 <span (click)="onAddToCart(item)">+</span>
@@ -8,3 +18,4 @@
         </div>
         <div class="item-title">{{ item.title | translate | shortenTitle:5 }}</div>
         <div class="item-price">{{ item.price | thousandSeparator }} €</div>
+    </span>

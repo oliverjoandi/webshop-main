@@ -25,7 +25,8 @@ export class AddItemComponent implements OnInit {
         form.value.category,
         form.value.barcode,
         form.value.producer,
-        form.value.description
+        form.value.description,
+        true
         )
       this.itemService.items.push(item);
       // this.itemService.saveItemsToDatabase();

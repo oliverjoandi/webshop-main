@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { ItemModule } from '../item/item.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { CarouselSettingsComponent } from './carousel-settings/carousel-settings.component';
 
 
 
@@ -18,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     EditItemComponent,
     AdminHomeComponent,
     ViewItemsComponent,
+    CarouselSettingsComponent,
   ],
   imports: [
     CommonModule,

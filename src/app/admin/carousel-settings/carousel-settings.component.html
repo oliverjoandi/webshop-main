@@ -1,0 +1,42 @@
+<button class="main-button back" routerLink="/admin">Tagasi</button>
+
+<form (ngSubmit)="onSubmit()" [formGroup]="carouselSettingsForm">
+    <label>Pildi vahetus kiirus</label>
+    <input type="number" formControlName="interval"><br>
+    <label>Viimasest pildist esimesse</label>
+    <input type="checkbox" formControlName="wrap"><br>
+    <label>Klaviatuuriga saab liikuda</label>
+    <input type="checkbox" formControlName="keyboard"><br>
+    <label>Hiirt hoides peatub</label>
+    <input type="checkbox" formControlName="pauseOnHover"><br>
+    <label>Näita vasak ja parem nooli</label>
+    <input type="checkbox" formControlName="showNavigationArrows"><br>
+    <label>Näita alumisi kaste</label>
+    <input type="checkbox" formControlName="showNavigationIndicators"><br>
+    <button type="submit">SISESTA</button>
+  
+</form>
+
+<label>Pildi Url</label>
+<input type="text" [(ngModel)]="imageUrl"><br>
+<label>Pildi pealkiri</label>
+<input type="text" [(ngModel)]="imageHeader"><br>
+<label>Pildi tekst</label>
+<input type="text" [(ngModel)]="imageText"><br>
+<label>Pildi altenatiivtekst</label>
+<input type="text" [(ngModel)]="imageAlt"><br>
+<label>Pildi link</label>
+<input type="text" [(ngModel)]="url"><br>
+<label>Sisemine link</label>
+<input type="text" [(ngModel)]="isInternal"><br>
+<button [disabled]="!imageUrl" (click)="onAddGalleryPicture()">SISESTA</button>
+
+
+<div *ngFor="let image of images; let i = index">
+    <img style="width: 200px; height: 100px;" src="{{ image.url }}">
+    <button (click)="onDeleteGalleryPicture(i)">KUSTUTA</button>
+    <div>Pealkiri: {{ image.header }}</div>
+    <div>Sisu: {{ image.text }}</div>
+    <div>Alternatiivtekst: {{ image.alt }}</div>
+    </div>
+

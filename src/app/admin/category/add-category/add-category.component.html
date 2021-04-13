@@ -1,0 +1,5 @@
+<button class="main-button back" routerLink="../categories">{{'Tagasi' | translate}}</button>
+
+<label>Kategooria nimetus</label>
+<input type="text" [(ngModel)]="newCategory" placeholder="Kategooria">
+<button (click)="onSubmit()">Sisesta uus kategooria</button>

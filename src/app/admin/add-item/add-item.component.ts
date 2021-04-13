@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { CategoryService } from '../category/category.service';
 
 @Component({
   selector: 'app-add-item',
@@ -9,10 +10,18 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
+  categories: {categoryName: string} [] = []
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
+      for (const key in categoriesFromFb) {
+        const element = categoriesFromFb[key];
+        this.categories.push({categoryName: element.categoryName})
+      }
+    })
     
   }
   onSubmit(form: NgForm) {

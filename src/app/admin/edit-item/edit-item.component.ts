@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { CategoryService } from '../category/category.service';
 
 @Component({
   selector: 'app-edit-item',
@@ -14,13 +15,23 @@ export class EditItemComponent implements OnInit {
   item!: Item;
   editItemForm!: FormGroup;
   id!: number;
+  categories: {categoryName: string} [] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private itemService: ItemService,
     private router: Router,
-    private location: Location) { }
+    private location: Location,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
+      for (const key in categoriesFromFb) {
+        const element = categoriesFromFb[key];
+        this.categories.push({categoryName: element.categoryName})
+      }
+    })
+
+
     this.id = (Number)(this.activatedRoute.snapshot.paramMap.get('itemId'));
     this.item = this.itemService.items[this.id];
     this.editItemForm = new FormGroup({

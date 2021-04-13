@@ -9,7 +9,13 @@
     <label>Hind</label><br>
     <input placeholder="Toote hind" type="number" required ngModel name="price"><br>
     <label>Kategooria</label><br>
-    <input placeholder="Toote kategooria" type="text" required ngModel name="category"><br>
+    <!-- <input placeholder="Toote kategooria" type="text" required ngModel name="category"><br> -->
+    <select ngModel name="category">
+        <option disabled value="">Vali kategooria</option>
+        <option *ngFor="let category of categories" [value]="category.categoryName">
+            {{category.categoryName}}
+        </option>
+    </select>
     <label>Ribakood</label><br>
     <input placeholder="Toote ribakood" type="number"  ngModel name="barcode"><br>
     <label>Tootja</label><br>

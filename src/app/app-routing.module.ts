@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddItemComponent } from './admin/add-item/add-item.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { CarouselSettingsComponent } from './admin/carousel-settings/carousel-settings.component';
+import { AddCategoryComponent } from './admin/category/add-category/add-category.component';
+import { ViewCategoriesComponent } from './admin/category/view-categories/view-categories.component';
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { ViewItemsComponent } from './admin/view-items/view-items.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -23,6 +25,8 @@ const routes: Routes = [
     {path: "edit-item/:itemId", component: EditItemComponent },
     {path: "view-items", component: ViewItemsComponent  },
     {path: "carousel", component: CarouselSettingsComponent  },
+    {path: "categories", component: ViewCategoriesComponent },
+    {path: "add-category", component: AddCategoryComponent },
   ] },
 
  

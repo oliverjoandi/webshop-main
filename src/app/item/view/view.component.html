@@ -1,8 +1,14 @@
-{{ item | json }}
-
-<div class="add-to-cart-button-wrapper">
-    <div class="add-to-cart-button">
-        <span (click)="onDeleteFromCart(item)">-</span>
-        <span> kogus </span>
-        <span (click)="onAddToCart(item)">+</span>
+<div class="panel">
+    <img class="item-img" src="{{ item.imgSrc }}">
+    <div>
+        <h1 class="item-title">{{ item.title | translate |shortenTitle }}</h1>
+        <div class="item-title">{{ item.price | thousandSeparator }} €</div>
+        <div class="add-to-cart-button-wrapper">
+            <div class="add-to-cart-button">
+                <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>
+                <span>___</span>
+                <span (click)="onAddToCart(item)"><img src="assets/add(1).svg"></span>
+            </div>
+        </div>
+    </div>
 </div>

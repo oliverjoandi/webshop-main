@@ -2,28 +2,33 @@
 <!-- {{ kuupaev | date:"short" | uppercase }}
 {{ 50000 | currency:"EUR"}} -->
 
-<app-gallery-carousel></app-gallery-carousel>
+
 
 <br><br>
 
-<div (click)="onCategoryFilter(category)" *ngFor="let category of itemsOriginal | uniqueCategory">
+<div class="sidenav">
+  <div (click)="onCategoryFilter(category)"
+    *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory">
     {{ category }}
+  </div>
 </div>
 
-<br>
-<div class="filter-bar">
-    <div class="filter-name">{{ 'sort-text' | translate }}</div>
-    <div class="filter-value price" (click)="onSortPrice()">Hinna alusel</div>
-    <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku alusel' | translate }}</div>
-</div>
+<div class="main">
+    <app-gallery-carousel></app-gallery-carousel>
+    <div class="filter-bar">
+        <div class="filter-name">{{ 'sort-text' | translate }}</div>
+        <div class="filter-value price" (click)="onSortPrice()">Hinna alusel</div>
+        <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku alusel' | translate }}</div>
+    </div>
 
-<div class="items-wrapper">
-    <div class="item" *ngFor="let itemShown of itemsShown | showActiveItems:isLoggedIn; let i = index">
-        <app-item-card
-         [item]="itemShown"
-          [i]="i"   
-          [loggedIn]="isLoggedIn"     
-          (itemActiveChanged)="itemActiveChanged($event)"
-          ></app-item-card>
-    </div>     
+ <div class="items-wrapper">
+    <app-item-card
+     [item]="itemShown"
+     [i]="i"   
+     [loggedIn]="isLoggedIn" 
+     class="item"
+     *ngFor="let itemShown of itemsShown | showActiveItems:isLoggedIn; let i = index"
+     (itemActiveChanged)="itemActiveChanged($event)">
+    </app-item-card>
+ </div>     
 </div>

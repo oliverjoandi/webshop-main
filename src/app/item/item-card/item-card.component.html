@@ -1,13 +1,14 @@
-<span class="admin-buttons" *ngIf="isLoggedIn"></span>
-<span [ngClass]="{'is-active': item.isActive, 'not-active': !item.isActive}" (click)="OnItemActive()">
+<span class="admin-buttons" *ngIf="isLoggedIn">
+ <span [ngClass]="{'is-active': item.isActive, 'not-active': !item.isActive}" (click)="OnItemActive()">
     <span *ngIf="!item.isActive;else templateName">Aktiivseks</span>
     <ng-template #templateName>Mitte aktiivseks</ng-template>
+  </span>
+ <span [routerLink]="['/admin/edit-item', i]">Muuda</span>
 </span>
-<span [routerLink]="['/admin/edit-item', i]">Muuda</span>
 
 
 <span [ngClass]="{'item-grayed': !item.isActive}">
- <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
+ <img routerLink="view/{{item.barcode}}" src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
             <div class="add-to-cart-button" *ngIf="item.isActive">
                 <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>

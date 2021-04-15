@@ -25,11 +25,11 @@ export class CategoryService {
   }
 
   addCategoryToDatabase(catergoryObject: {categoryName: string}): Observable<Object> {
-    return this.http.post(this.url + "category.json", catergoryObject);
+    return this.http.post(this.url + "categories.json", catergoryObject);
   }
 
   getCategoriesFromDatabase():Observable<{categoryName: string}[]> {
-    return this.http.get<{categoryName: string}[]>(this.url + "category.json");
+    return this.http.get<{categoryName: string}[]>(this.url + "categories.json");
   }
 
   deleteFromDatabase(categories: {id: string, categoryName: string}[]) {

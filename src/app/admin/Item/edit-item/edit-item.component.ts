@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
-import { CategoryService } from '../category/category.service';
+import { CategoryService } from '../../category/category.service';
 
 @Component({
   selector: 'app-edit-item',

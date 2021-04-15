@@ -15,9 +15,14 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   saveItemsToDatabase(): void {
+    // this.items = this.items.map(item => { return { ...item, barcode: this.getRandomNumber() } });
     this.http.put(this.url + "items.json", this.items).subscribe();
   }
 // võib ka this.url + "items.json" panna terve lingi! näiteks: this.http.put(https://webshio-oliver-default-rtdb.europe-west1.firebasedatabase.app/items.json", this.items).subscribe()
+
+getRandomNumber() {
+ return Math.floor((Math.random() * 99999999 - 10000000) + 10000000)  
+}
   
   getItemsFromDatabase(): Observable<Item[]> {
     return this.http.get<Item[]>(this.url + "items.json"); 

@@ -63,7 +63,7 @@ import { GalleryCarouselComponent } from './home/gallery-carousel/gallery-carous
   ItemModule,
   NgbModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, ShowActiveItemsPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

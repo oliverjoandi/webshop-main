@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
-import { CategoryService } from '../category/category.service';
+import { CategoryService } from '../../category/category.service';
 
 @Component({
   selector: 'app-add-item',

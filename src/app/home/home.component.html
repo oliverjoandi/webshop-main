@@ -7,8 +7,10 @@
 <br><br>
 
 <div class="sidenav">
+  <div (click)="onCategoryFilter('all')" [ngClass]="{'category-active': categoryShown == 'all'}">Kõik kategooriad</div>
   <div (click)="onCategoryFilter(category)"
-    *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory">
+    *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory"
+    [ngClass]="{'category-active': category == categoryShown}">
     {{ category }}
   </div>
 </div>
@@ -27,7 +29,7 @@
      [i]="i"   
      [loggedIn]="isLoggedIn" 
      class="item"
-     *ngFor="let itemShown of itemsShown | showActiveItems:isLoggedIn; let i = index"
+     *ngFor="let itemShown of itemsShown; let i = index"
      (itemActiveChanged)="itemActiveChanged($event)">
     </app-item-card>
  </div>     

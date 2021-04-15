@@ -26,7 +26,7 @@ export class ViewCategoriesComponent implements OnInit {
   onRemoveCategory(i: number) {
     let isConfirm = confirm("Oled kindel, et soovid kustutada")
     if (isConfirm) {
-      this.categoryService.categories.splice(i,1)
+      this.categories.splice(i,1)
       this.categoryService.deleteFromDatabase(this.categories).subscribe();
     }
   }

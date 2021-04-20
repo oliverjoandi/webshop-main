@@ -16,7 +16,11 @@
         </option>
     </select>
     <label>Ribakood</label><br>
-    <input placeholder="Toote ribakood" type="number"  formControlName="barcode"><br>
+    <input (keyup)="onCheckBarcodeUnique()" placeholder="Toote ribakood" pattern="^[0-9]*$"
+    type="text"  formControlName="barcode" required><br>
+    <div *ngIf="!barcodeUnique" class="alert alert-danger">
+        This barcode already exists!
+      </div>
     <label>Tootja</label><br>
     <input placeholder="Toote tootja" type="text"  formControlName="producer"><br>
     <label>Kirjeldus</label><br>

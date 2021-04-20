@@ -26,10 +26,9 @@
  <div class="items-wrapper">
     <app-item-card
      [item]="itemShown"
-     [i]="i"   
      [loggedIn]="isLoggedIn" 
      class="item"
-     *ngFor="let itemShown of itemsShown; let i = index"
+     *ngFor="let itemShown of itemsShown"
      (itemActiveChanged)="itemActiveChanged($event)">
     </app-item-card>
  </div>     

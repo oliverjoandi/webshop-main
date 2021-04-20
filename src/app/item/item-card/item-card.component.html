@@ -3,7 +3,7 @@
     <span *ngIf="!item.isActive;else templateName">Aktiivseks</span>
     <ng-template #templateName>Mitte aktiivseks</ng-template>
   </span>
- <span [routerLink]="['/admin/edit-item', i]">Muuda</span>
+ <span [routerLink]="['/admin/edit-item', item.barcode]">Muuda</span>
 </span>
 
 

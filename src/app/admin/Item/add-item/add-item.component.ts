@@ -10,7 +10,10 @@ import { CategoryService } from '../../category/category.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
-  categories: {categoryName: string} [] = []
+  categories: {categoryName: string} [] = [];
+  barcode!: number;
+  items: Item[] = [];
+  barcodeUnique = true;
 
   constructor(private itemService: ItemService,
     private categoryService: CategoryService) { }
@@ -22,8 +25,23 @@ export class AddItemComponent implements OnInit {
         this.categories.push({categoryName: element.categoryName})
       }
     })
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.items = [];
+      this.itemService.items = [];
+  for (const key in itemsFromDatabase) {
+     const element = itemsFromDatabase[key];
+     this.items.push(element);
+     this.itemService.items.push(element);
+  }
+});
     
   }
+
+  onCheckBarcodeUnique() {
+    let barcodeId = this.items.findIndex(item => item.barcode == this.barcode)
+    this.barcodeUnique = barcodeId == -1 ? true : false;  
+  }
+
   onSubmit(form: NgForm) {
     console.log(form.value)
     if (form.valid == true) {
@@ -39,8 +57,8 @@ export class AddItemComponent implements OnInit {
         )
       this.itemService.items.push(item);
       // this.itemService.saveItemsToDatabase();
-      this.itemService.addItemToDatabase(item);
-      form.reset();
+      this.itemService.addItemToDatabase(item).subscribe(() => form.reset());
+      
     }
 
   }

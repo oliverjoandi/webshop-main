@@ -23,3 +23,9 @@ form {
     background-color: lightgray;
     cursor: initial;
 }
+
+.alert-danger {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 40px;
+}

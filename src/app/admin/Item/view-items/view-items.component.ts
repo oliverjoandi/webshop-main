@@ -27,12 +27,13 @@ items: Item[] = [];
   }
 
 
-  onDeleteItem(i: number) {
+  onDeleteItem(barcode: number) {
     let isConfirm = confirm(this.translate.instant( "oled kustutamas!"));
     if (isConfirm) {
+      let i = this.itemService.items.findIndex(item => item.barcode == barcode);
       this.itemService.items.splice(i, 1);
       this.items.splice(i, 1)
-      this.itemService.saveItemsToDatabase();
+      this.itemService.saveItemsToDatabase().subscribe();
     }
     // alert confirmi asemel tuleb kast mis hoistab aga confirmis pead ise ok/cancel valima
     

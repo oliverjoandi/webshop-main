@@ -11,7 +11,6 @@ import { Item } from 'src/app/models/item.model';
 })
 export class ItemCardComponent implements OnInit {
   @Input() item! : Item;
-  @Input() i! : number;
   @Input('loggedIn') isLoggedIn! : boolean;
   @Output() itemActiveChanged = new EventEmitter;
  

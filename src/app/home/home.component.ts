@@ -37,39 +37,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     let cookieValue = this.cookieService.get('Ostukorv');
     this.cartItems = cookieValue == "" ? [] : JSON.parse(cookieValue);
-
-
-    let user = this.autologinService.autologin();
-    this.autologinService.isLoggedIn.subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn;
-      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
-    })
-    this.isLoggedIn = user ? true : false;
-    // this.items = this.itemService.items;
-    // this.itemService.saveItemsToDatabase();    
-    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
-      this.itemsOriginal = [];
-      this.itemService.items = [];
-      for (const key in itemsFromDatabase) {
-         const element = itemsFromDatabase[key];
-         this.itemsOriginal.push(element)
-         this.itemsShown = this.itemsOriginal.slice();
-         this.itemService.items.push(element);
-      }
-      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
-      // this.items = itemsFromDatabase;  üleval olev asi on selleks et kaoks järjekorra number database-is
-      // this.itemService.items = itemsFromDatabase;
-      // slice teeb massiivist koopia
-      // splice kustustab massiivist elemendi
-      // split teeb stringist massiivi
-      // let cartItems = this.cartService.cartItems;
-      // this.itemsOriginal.map(item=> {
-      //   cartItems.forEach(cartItem => ) {
-      //     return { ...item, count: cartItem.count}
-      //   }
-      // })
-    });
-    
+    this.checkIfUserLoggedIn();
+    this.getItemsFromDatabase();    
   }
 
   onSortTitle() {
@@ -128,6 +97,55 @@ export class HomeComponent implements OnInit {
     this.itemService.items[i] = item;
     this.itemService.saveItemsToDatabase().subscribe();
   }
+
+  getItemsFromDatabase() {
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
+      this.itemsOriginal = [];
+      this.itemService.items = [];
+      for (const key in itemsFromDatabase) {
+         const element = itemsFromDatabase[key];
+         this.itemsOriginal.push(element)
+         this.itemsShown = this.itemsOriginal.slice();
+         this.itemService.items.push(element);
+      }
+      
+      this.itemsOriginal = this.itemsOriginal.map(itemOriginal => {
+        const index = this.cartItems.findIndex(cartItem => cartItem['cartItem']['barcode'] == itemOriginal.barcode);
+        const { count } = index !== -1 ? this.cartItems[index] : { count: 0 };
+        return {
+           ...itemOriginal,
+           count
+        };
+     });
+     this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);      
+    });
+  }
+
+  checkIfUserLoggedIn() {
+    let user = this.autologinService.autologin();
+    this.autologinService.isLoggedIn.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
+    })
+    this.isLoggedIn = user ? true : false;
+  }
   
 }
   
+
+
+
+
+
+
+// this.items = itemsFromDatabase;  üleval olev asi on selleks et kaoks järjekorra number database-is
+      // this.itemService.items = itemsFromDatabase;
+      // slice teeb massiivist koopia
+      // splice kustustab massiivist elemendi
+      // split teeb stringist massiivi
+      // let cartItems = this.cartService.cartItems;
+      // this.itemsOriginal.map(item=> {
+      //   cartItems.forEach(cartItem => ) {
+      //     return { ...item, count: cartItem.count}
+      //   }
+      // })

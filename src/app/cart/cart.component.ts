@@ -44,48 +44,24 @@ export class CartComponent implements OnInit {
     };
 
   onDeleteOneFromCart(item: Item) {
-      let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-      if (i != -1) {
-        if (this.cartService.cartItems[i].count == 1) {
-          this.cartService.cartItems.splice(i, 1);
-        } else { 
-          this.cartService.cartItems[i].count -= 1
-        }
-        
-        this.cartService.cartChanged.next(this.cartService.cartItems);
-        this.cookieService.set( 'Ostukorv', JSON.stringify(this.cartService.cartItems));
-        this.calculateSumOfCart();
+      this.cartService.deleteFromCart(item);
+      this.calculateSumOfCart();
       }
-      // kui tahad et kontrolliks kahte asja siis && märk....a la - item.title == cartItem.title && item.price == cartItem.price
+      
+    
   
-    }
-  
-    onAddToCart(item: Item) {
-      let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
-      if (i == -1) {
-        this.cartService.cartItems.push({ cartItem: item, count: 1 });
-        
-    } else {
-      this.cartService.cartItems[i].count += 1;
-    }
-      this.cartService.cartChanged.next(this.cartService.cartItems);
-      this.cookieService.set( 'Ostukorv', JSON.stringify(this.cartService.cartItems));
+  onAddToCart(item: Item) {
+      this.cartService.addToCart(item)
       this.calculateSumOfCart();
     }
 
-
-
-
-
-
-  
-
-  calculateSumOfCart () {
+  calculateSumOfCart () { 
     this.sumOfCart = 0
     this.cartItems.forEach(item => {
       this.sumOfCart = this.sumOfCart + item.cartItem.price * item.count;      
     });
   }
- }
+  
+ 
 
-
+}

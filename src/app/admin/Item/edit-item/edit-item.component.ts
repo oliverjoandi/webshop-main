@@ -31,27 +31,45 @@ export class EditItemComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.categoriesObservable = this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
-      for (const key in categoriesFromFb) {
-        const element = categoriesFromFb[key];
-        this.categories.push({categoryName: element.categoryName})
-      }
-    })
     this.itemsObservable = this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase => {
       this.items = [];
       this.itemService.items = [];
-  for (const key in itemsFromDatabase) {
-     const element = itemsFromDatabase[key];
-     this.items.push(element);
-     this.itemService.items.push(element);
+       for (const key in itemsFromDatabase) {
+        const element = itemsFromDatabase[key];
+        this.items.push(element);
+        this.itemService.items.push(element);}} );
+  
+   
+  this.findItemFromService();
+  this.fillFormWithValues(); 
   }
-});
+  
+  
+
+
+    
+      
+  
+
+  getCategoriesFromDatabase() {
+    this.categoriesObservable = this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
+      for (const key in categoriesFromFb) {
+        const element = categoriesFromFb[key];
+        this.categories.push({categoryName: element.categoryName})       }
+    })
+  }
+  
+
+  findItemFromService() {
     this.id = (Number)(this.activatedRoute.snapshot.paramMap.get('itemId'));
     let item = this.itemService.items.find(item => item.barcode == this.id);
     if (item) {
       this.item = item;
-      this.barcode = item.barcode;
-    }
+      this.barcode = item.barcode };
+  }
+  
+
+  fillFormWithValues() {
     this.editItemForm = new FormGroup({
       title: new FormControl(this.item.title),
       price: new FormControl(this.item.price),
@@ -83,7 +101,8 @@ export class EditItemComponent implements OnInit, OnDestroy {
           form.value.barcode,
         form.value.producer,
         form.value.description,
-        form.value.isActive);
+        form.value.isActive,
+        0);
     let itemId = this.itemService.items.findIndex(item => item.barcode == this.id);
     if (itemId != -1) {
       this.itemService.items[itemId] = item;
@@ -102,4 +121,4 @@ export class EditItemComponent implements OnInit, OnDestroy {
    this.itemsObservable.unsubscribe();
  }   
 
-   }
+}

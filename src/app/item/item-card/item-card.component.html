@@ -7,12 +7,14 @@
 </span>
 
 
+
+
 <span [ngClass]="{'item-grayed': !item.isActive}">
  <img routerLink="view/{{item.barcode}}" src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
             <div class="add-to-cart-button" *ngIf="item.isActive">
-                <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>
-                <span> _kogus_</span>
+                <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>                
+                <span>{{ item.count }} tk</span>
                 <span (click)="onAddToCart(item)"><img src="assets/add(1).svg"></span>
             </div>
         </div>

@@ -6,7 +6,7 @@
         <div class="add-to-cart-button-wrapper">
             <div class="add-to-cart-button">
                 <span (click)="onDeleteFromCart(item)"><img src="assets/minus.svg"></span>
-                <span>___</span>
+                <span>{{ item.count }}</span>
                 <span (click)="onAddToCart(item)"><img src="assets/add(1).svg"></span>
             </div>
         </div>

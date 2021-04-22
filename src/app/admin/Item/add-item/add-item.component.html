@@ -35,5 +35,5 @@
     <input placeholder="Toote tootja" type="text"  ngModel name="producer"><br>
     <label>Kirjeldus</label><br>
     <input placeholder="Toote kirjeldus" type="text"  ngModel name="description"><br>
-    <button class="main-button add" [disabled]="addItemForm.invalid" type="submit">Sisesta toode</button>
+    <button class="main-button add" [disabled]="addItemForm.invalid || !barcodeUnique" type="submit">Sisesta toode</button>
 </form>
